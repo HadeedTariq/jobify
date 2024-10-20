@@ -1,10 +1,10 @@
-"use client";
-import { SignedOut, SignOutButton, useAuth } from "@clerk/nextjs";
 import Link from "next/link";
+import SignOut from "./SignOut";
+import { currentUser } from "@clerk/nextjs/server";
+import { UserButton } from "@clerk/nextjs";
 
-const Navbar = () => {
-  const { userId,signOut } = useAuth();
-
+const Navbar = async () => {
+  const user = await currentUser();
   return (
     <header className="sticky inset-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-lg">
       <nav className="mx-auto flex max-w-6xl gap-8 px-6 transition-all duration-200 ease-in-out lg:px-12 py-4">
@@ -19,7 +19,7 @@ const Navbar = () => {
 
         <div className="flex-grow"></div>
         <div className="items-center justify-center gap-6 flex">
-          {!userId ? (
+          {!user?.id ? (
             <>
               <Link
                 className="px-8 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg"
@@ -36,12 +36,10 @@ const Navbar = () => {
               </Link>
             </>
           ) : (
-            <button
-              onClick={()=>signOut()}
-              className="rounded-2xl bg-red-600 px-4 py-2 font-bold leading-none text-white"
-            >
-              SignOut
-            </button>
+            <>
+              {/* <SignOut /> */}
+              <UserButton />
+            </>
           )}
         </div>
       </nav>
