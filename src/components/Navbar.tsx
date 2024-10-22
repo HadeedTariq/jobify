@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SignOut from "./SignOut";
+
 import { currentUser } from "@clerk/nextjs/server";
 import { UserButton } from "@clerk/nextjs";
 
@@ -19,7 +19,7 @@ const Navbar = async () => {
 
         <div className="flex-grow"></div>
         <div className="items-center justify-center gap-6 flex">
-          {!user || user.id ? (
+          {!user || !user.id ? (
             <>
               <Link
                 className="px-8 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg"

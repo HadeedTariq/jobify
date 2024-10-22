@@ -8,7 +8,7 @@ import PdfViewer from "@/components/PdfViewer";
 
 const AdditionalInfo = async () => {
   const user = await currentUser();
-  if (!user?.id) return redirect("/sign-in");
+  if (!user || !user.id) return redirect("/sign-in");
   const { rows } = await pool.query(
     "select username from users where userid=$1 and passion<>'none'",
     [user.id]
@@ -25,6 +25,22 @@ const AdditionalInfo = async () => {
     "use server";
     const passion = formData.get("passion");
     const resume = formData.get("resume") as File;
+    console.log(resume);
+
+    console.log({ files: [resume] });
+
+    // try {
+    //   const res = await fetch(
+    //     "http://localhost:3000/api/uploadthing?actionType=upload&slug=pdfUploader",
+    //     {
+    //       method: "POST",
+    //       body: data,
+    //     }
+    //   );
+    //   console.log(await res.json());
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   return (
