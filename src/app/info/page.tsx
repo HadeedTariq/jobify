@@ -24,7 +24,8 @@ const AdditionalInfo = async () => {
     "use server";
     const passion = formData.get("passion");
     const resume = formData.get("resume");
-    console.log(resume);
+    // ogypr3xk
+    // lmsproject
   };
   return (
     <div className="flex flex-col">
